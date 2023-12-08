@@ -1,0 +1,7 @@
+Sprites.png
+size:256,32
+repeat:none
+Demon_Imp
+bounds:130,12,64,16
+Knight_Animation
+bounds:0,0,128,28
