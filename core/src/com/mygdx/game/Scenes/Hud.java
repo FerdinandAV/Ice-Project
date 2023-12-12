@@ -1,4 +1,4 @@
-package com.mygdx.game.Scenes;
+/*package com.mygdx.game.Scenes;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -66,3 +66,4 @@ public class Hud implements Disposable {
         stage.dispose();
     }
 }
+*/

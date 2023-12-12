@@ -52,6 +52,9 @@ public class Demons extends Sprite {
      * Creates the Demon in the shape of a circle
      */
 
+
+
+
 /*
      Demon(PlayScreen, Float x, Float y) {
      this.world = screen.getWorld();
@@ -125,6 +128,7 @@ public class Demons extends Sprite {
 
         if (Math.abs(direction.x) + Math.abs(direction.y) < 0.5) {
             demonBody.setLinearVelocity(0, 0);
+
         }
 
         else if ((Math.abs(demonBody.getLinearVelocity().x) <= 1 || Math.abs(demonBody.getLinearVelocity().y) <= 1)) {

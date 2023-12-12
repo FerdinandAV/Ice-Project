@@ -2,16 +2,16 @@ package com.mygdx.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.DemonSlayer;
 import com.mygdx.game.MapLevels.Platform;
 
-import javax.swing.*;
 
 public class Slayer extends Sprite {
     public enum State {IDLING, RUNNING, STANDING}
@@ -46,7 +46,7 @@ public class Slayer extends Sprite {
 
         for (int i = 1; i < 4; i++)
             frames.add(new TextureRegion(getTexture(), i * 16, 0, 16, 28));
-        playerIdle = new Animation(1f, frames);
+        playerIdle = new Animation(0.5f, frames);
 
         playerStand = new TextureRegion(getTexture(), 0, 0, 16, 28);
 
@@ -87,6 +87,16 @@ public class Slayer extends Sprite {
         fdef.shape = shape;
         playerBody.createFixture(fdef);
     }
+
+
+    public void Bullet(int Startx,int Starty){
+
+    }
+
+
+
+
+
 
 
     public void update(float dt) {
