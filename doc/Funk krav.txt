@@ -1,0 +1,70 @@
+Vores funky krav:
+
+Vores Spillefirma hedder: Crash hole Demons. Vi bygger et online version af det klassiske Vampire survivor.
+Spillet hedder: Demon Slayer.
+
+Spillet skal have nogle af de samme elementer som Vampire Survivor.
+Al interaktion foregår igennem et interface
+
+Spillet består af 2 hoveddele: En menu og selve spillet
+
+I en menuen findes:
+
+1. Shop:
+    Her kan man opgradere sig selv med mønter man tjener i løbet af spillet.
+
+   Elixir:
+   Potions 50%    50 mønter
+   Potions 100%   100 mønter
+   Mana    50%    25 mønter
+   Mana    100%    50 mønter
+
+   Indeholder nye våben:
+    Laser gun koster 100 mønter
+    Pisk  koster 20 mønter
+    Sværd koster 30 mønter
+    axe throw    30 mønter
+    Bazooka      200 mønter
+    Magic balls: fire og ice. Koster 100 mønter.
+
+
+
+2. Start
+3. Exit
+
+Når spillet er i gang består det af runder:
+
+I en runde findes:
+
+1. Spille Platformen:
+    Size.
+    Baggrund indeholder en farve.
+    Dekoration. Eksempel træer....
+    Wavetid/rundetid på platformen, 10 min. til næste runde.
+    Mønte Score tavle for sine mønter.
+    10 Waves. runder.
+
+
+2. Spilleren:
+    Starter fra midten af platformen.
+    Spilleren skal kunne, skyde med en bullet.
+    Kuglerne skal kunne skyde i alle retninger.
+    Kan bevæge sig i alle retninger. (op, ned, venstre og høj side)
+    Skyde flere kugler af gangen.
+    Health bar 100.
+    Mister 5 liv per damage fra fjenden.
+    Tjener 5 mønter pr. enemy
+    Tjener 20 mønter pr. boss
+    Mister 1 mønter hvis man bliver ramt af fjenden.
+
+3. Fjenden:
+    Kommer fra alle retninger.
+    Når fjenden rammer Spilleren, vil spilleren miste liv.
+    Health bar 100.
+    Mister 50 liv per damage.
+    Forskellige Farver.
+    Boss efter runde.
+
+Efter en runde er overstået, skal man kunne vælge at forsætte videre eller opgradere sig selv.
+
+Når alle runderne er overstået, har du vundet dit spil, og du vender tilbage til hovedmenuen.

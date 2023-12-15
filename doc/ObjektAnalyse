@@ -1,0 +1,27 @@
+Alle ord i funktionellekrav:
+Menu
+Våben
+Spiller
+Shop
+Runde
+Platform
+Health bar
+Fjender
+Opgraderinger
+
+
+
+
+
+
+
+
+
+Alle entiteter:
+
+Menu: Her vælger man om man vil starte spillet, købet noget i shoppen eller forlade spillet
+Våben: Det er en genstand der sidder på spilleren
+Spiller: Det er personen som spiller spillet
+Fjende: Det er hvad spilleren kæmper imod
+Shop: Her kan man købe ting
+Platform: Det er her spilleren bevæger sig

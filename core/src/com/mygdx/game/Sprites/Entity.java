@@ -1,35 +1,33 @@
 package com.mygdx.game.Sprites;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.DemonSlayer;
-import com.mygdx.game.MapLevels.Platform;
+import com.mygdx.game.Launcher;
 
-public class Entity extends Sprite{
+public abstract class Entity extends Sprite{
 
-    float posX, posY;
+    public float posX, posY;
     public Body body;
+    public float health;
 
     public enum State {IDLING, RUNNING};
     public State currentState, previousState;
 
-    private Animation<TextureRegion> runAnimationTexture, idleAnimationTexture;
+    public Animation<TextureRegion> runAnimationTexture, idleAnimationTexture;
 
     private float stateTimer;
     private boolean runningRight;
+    String type;
 
-    public Entity(float posX, float posY, TextureAtlas texture, String locTexture) {
+    public Entity(float posX, float posY, float health, TextureAtlas texture, String locTexture, String type) {
         super(texture.findRegion(locTexture));
         this.posX = posX;
         this.posY = posY;
+        this.health = health;
 
         currentState = State.IDLING;
         previousState = State.IDLING;
@@ -37,10 +35,17 @@ public class Entity extends Sprite{
         stateTimer = 0;
         runningRight = true;
 
-        idleAnimationTexture = animation(0,3, 0.25f);
-        runAnimationTexture = animation(3,7,0.5f);
+        if (type.equals("Player")) {
+            idleAnimationTexture = animation(0,3, 0.25f);
+            runAnimationTexture = animation(3,7,0.2f);
+        }
+        else if (type.equals("Enemy")) {
+            runAnimationTexture = animation(8,11,0.1f);
+            idleAnimationTexture = animation(8,11,0.1f);
+        }
 
-        setBounds(0, 0, 16 / DemonSlayer.PPM, 28 / DemonSlayer.PPM);
+
+        setBounds(0, 0, 16 / Launcher.PixelsPerMeter, 28 / Launcher.PixelsPerMeter);
         setRegion(new TextureRegion(getTexture(), 0, 0, 16, 28));
     }
 
@@ -53,8 +58,22 @@ public class Entity extends Sprite{
     }
 
     public void update(float delta) {
-        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 2);
+        setPosition(body.getPosition().x - getWidth() / 2, body.getPosition().y - getHeight() / 4);
         setRegion(getFrame(delta));
+    }
+
+    public void createCollision(World world) {
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(posX / Launcher.PixelsPerMeter, posY / Launcher.PixelsPerMeter);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        body = world.createBody(bdef);
+        FixtureDef fdef = new FixtureDef();
+        CircleShape shape = new CircleShape();
+        shape.setRadius(0.01f);
+        fdef.shape = shape;
+        body.createFixture(fdef);
+
+
     }
 
     public TextureRegion getFrame(float delta) {
@@ -63,7 +82,7 @@ public class Entity extends Sprite{
         TextureRegion region = null;
         switch (currentState) {
             case RUNNING:
-                region = (TextureRegion) idleAnimationTexture.getKeyFrame(stateTimer, true);
+                region = (TextureRegion) runAnimationTexture.getKeyFrame(stateTimer, true);
                 break;
             case IDLING:
                 region = (TextureRegion) idleAnimationTexture.getKeyFrame(stateTimer, true);
@@ -94,6 +113,14 @@ public class Entity extends Sprite{
         else {
             return State.IDLING;
         }
+    }
+
+    public abstract void takeDamage(float damage);
+
+    public abstract void attack();
+
+    public float getHealth() {
+        return health;
     }
 
 }

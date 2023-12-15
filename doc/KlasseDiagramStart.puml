@@ -1,0 +1,110 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Main
+class Menu
+class Platform
+class Player
+class PlayerHealthManager
+class Enemy
+class EnemyHealthManager
+class Weapon
+class Shop
+class Movement
+class Position
+class Armor
+
+Menu : Start
+Menu : Exit
+
+Platform : +Size()
+Platform : +Background()
+Platform : +Waves()
+Platform : -Wave Timer
+Platform : -Amount of Waves
+Platform : +Score Board()
+Platform : -Amount of Coins
+
+
+
+
+Player : +Player Action()
+Player : +ArrayList PlayerAttacks
+Player : -Coin Score
+Player : -Health Bar
+Player : -Access to Shop
+Player : +Player Display()
+
+
+PlayerHealthManager : +PlayerStatus()
+PlayerHealthManager : -PlayerPresentHealth
+PlayerHealthManager : -PlayerMaxHealth
+PlayerHealthManager : -PlayerDamage
+PlayerHealthManager : +PlayerInjuries()
+PlayerHealthManager : +Elixir()
+
+
+Enemy : +Enemy Action()
+Enemy : + ArrayList EnemyAttacks
+Enemy : +Enemy Display()
+Enemy : -Type of Enemy
+Enemy : -Amount of Enemy
+Enemy : + ArrayList Enemy
+
+Enemy : +FollowPlayer()
+
+Movement : +Enemy Movements()
+Movement : +Player Movements()
+Movement : -PlayerSpeed
+Movement : -EnemySpeed
+
+Position : +EnemyPosition()
+Position : +PlayerPosition()()
+
+EnemyHealthManager : -EnemyPresentHealth
+EnemyHealthManager : -EnemyMaxHealth
+EnemyHealthManager : -EnemyDamage
+EnemyHealthManager : +EnemyDeath()
+EnemyHealthManager : +EnemyInjured()
+
+Weapon : +LaserGun()
+Weapon : +Whip()
+Weapon : +Sword()
+Weapon : +Axe Throw()
+Weapon : +Demon Sword
+Weapon : +Bazooka()
+Weapon : +Shiny Balls
+Weapon : +Ordinary Balls
+Weapon : +Magic Balls()
+Weapon : +Demon Balls
+
+Armor : Feather Armor
+Armor : Leather Armor
+Armor : Chain Armor
+Armor : Plate Armor
+Armor : Demon Armor
+
+
+Shop : +Weapon Access()
+Shop : +Armor Access()
+Shop : +Ring Access()
+Shop : +Buy()
+Shop : -BuyPrice
+Shop : +Sell()
+Shop : -SellPrice
+
+
+Main *-- Menu
+Menu *-- Platform
+Platform *-- Player
+Platform *-- Enemy
+Platform *-- Shop
+Player *-- Movement
+Player *-- Armor
+Player *-- Weapon
+Player *-- Position
+Enemy *-- Position
+Player *-- PlayerHealthManager
+Enemy *-- EnemyHealthManager
+
+@enduml

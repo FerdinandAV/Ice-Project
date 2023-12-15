@@ -1,0 +1,47 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object Player
+object Shop
+object Currency
+object Menu
+object Game
+object Map
+
+object Start
+object Options
+object Exit
+
+object Enemy
+object Monster
+object Boss
+
+object Weapon
+object Bow
+object Staff
+object Sword
+
+
+Game *-- Menu
+Start *-- Player : has 1
+
+Menu *-- Start
+Menu *-- Exit
+Menu *-- Options
+
+Start *-- Map : has 1..3
+Start *-- Enemy : has 1..100
+Map *-- Shop : has 1
+
+Player *-- Weapon
+Player *-- Currency
+
+Enemy <|-- Monster
+Enemy <|-- Boss
+
+Weapon <|-- Bow
+Weapon <|-- Staff
+Weapon <|-- Sword
+
+
+@enduml

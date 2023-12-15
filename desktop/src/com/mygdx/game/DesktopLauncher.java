@@ -8,7 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
-		config.setTitle("Demon slayer");
-		new Lwjgl3Application(new DemonSlayer(), config);
+		config.setTitle("Demon Slayer");
+		new Lwjgl3Application(new Launcher(), config);
 	}
 }

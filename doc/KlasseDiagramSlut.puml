@@ -1,0 +1,194 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class DesktopLauncher
+class Launcher
+class MainMenuScreen
+class PlayScreen
+
+abstract class Entity
+class Player
+class Enemy
+
+abstract class Weapon
+class Gun
+class Bullet
+
+class Assets
+class Audio
+class Camera
+class TileObjectCreater
+
+
+'Arrows on classes'
+
+DesktopLauncher o-- Launcher
+
+Launcher *-- Audio
+Launcher *-- Assets
+Launcher *-- PlayScreen
+Launcher *-- MainMenuScreen
+
+PlayScreen *-- Player : has 1
+PlayScreen *-- Enemy : has 1..80
+PlayScreen *-- Camera
+PlayScreen *-- TileObjectCreater
+
+Entity <|-- Player
+Entity <|-- Enemy
+
+Player o-- Gun
+Weapon <|-- Gun
+Gun *-- Bullet
+
+
+
+
+
+'Attributes and methods'
+DesktopLauncher : +void main()
+
+PlayScreen : -Launcher game
+PlayScreen : -TextureAtlas impAtlas
+PlayScreen : -TextureAtlas chortAtlas
+PlayScreen : -TextureAtlas playerAtlas
+PlayScreen : -OrthographicCamera gamecam
+PlayScreen : -Camera gameCamera
+PlayScreen : -Viewport gamePort
+PlayScreen : -TmxMapLoader mapLoader
+PlayScreen : -TiledMap map
+PlayScreen : -OrthogonalTiledMapRenderer renderer
+PlayScreen : -World world
+PlayScreen : -Box2DDebugRenderer b2dr
+PlayScreen : -Player player
+PlayScreen : ArrayList enemies
+
+PlayScreen : +PlayScreen(Launcher game)
+PlayScreen : +update(float dt)
+PlayScreen : +render(float delta)
+PlayScreen : +resize(int width, int height)
+PlayScreen : +void pause()
+PlayScreen : +void resume()
+PlayScreen : +void hide()
+PlayScreen : +dispose()
+
+MainMenuScreen : -Stage stage
+MainMenuScreen : -Viewport viewport
+MainMenuScreen : -AssetManager assetManager
+MainMenuScreen : -Skin skin
+MainMenuScreen : -Table mainTable
+MainMenuScreen : -Launcher ds
+MainMenuScreen : -boolean gamePlaying
+MainMenuScreen : +MainMenuScreen(AssetManager assetManager, Launcher ds)
+MainMenuScreen : +show()
+MainMenuScreen : +addButton(String name)
+MainMenuScreen : +render(float delta)
+MainMenuScreen : +resize(int width, int height)
+
+Audio : Sound sound
+Audio : +ThemeSound()
+Audio : +MenuSound()
+Audio : +PlayerGettingHitSound()
+Audio : +PlayerDeathSound()
+Audio : +BossSound()
+Audio : +BossChaseSound()
+Audio : +StopSound()
+Audio : void render()
+
+Assets : -AssetManager assetManager
+Assets : +AssetDescriptor<TextureAtlas> TILESET_01
+Assets : +AssetDescriptor<Skin> SKIN
+Assets : +void loadAll()
+Assets : +AssetManager getAssetManager()
+
+Launcher : +static final int V_WIDTH = 500
+Launcher : +static final int V_HEIGHT = 500
+Launcher : +static final float PixelsPerMeter = 100
+Launcher : +SpriteBatch batch
+Launcher : -TextureAtlas tileset
+Launcher : +Assets assets
+Launcher : +Audio audio
+Launcher : +void create()
+Launcher : +void startGame()
+Launcher : +void endGame()
+Launcher : +void playAudio(String choice)
+
+
+
+TileObjectCreater : +TileObjectCreater(World world, TiledMap map)
+
+
+Camera : +Orthographic camera
+Camera : +Camera()
+Camera : +update()
+
+Weapon : +void attack()
+Weapon : +boolean canAttack()
+
+
+Gun : -ArrayList bullets
+Gun : -ArrayList deadBullets
+Gun : -float timeFromLastShot
+Gun : -float attackSpeed
+Gun : -float damage
+Gun : +void attack(float playerX, float playerY)
+Gun : +boolean canAttack()
+Gun : +getters()
+Gun : +void update()
+Gun : +render()
+
+
+Bullet : -Rectangle hitBox
+Bullet : -float x, y, time, speed
+Bullet : -Vector2 playerPos
+Bullet : -int width, height
+Bullet : +Texture text
+Bullet : -float x, y
+Bullet : +(float x, float y, Vector2 playerPos)
+Bullet : +Rectangle getHitBox()
+Bullet : +boolean doesHit(Rectangle r)
+Bullet : +void update(float delta)
+Bullet : +boolean isDead()
+Bullet : +void render(Spritebatch batch)
+
+
+Entity : +float posX, posY
+Entity : +Body body
+Entity : +float health
+Entity : +enum State {IDLING, RUNNING}
+Entity : +State currentState, previousState
+Entity : +Animation<TextureRegion> runAnimationTexture, idleAnimationTexture
+Entity : -float stateTimer
+Entity : -boolean runningRight
+Entity :  String type
+Entity : +Entity(float posX, float posY, float health, TextureAtlas texture, String locTexture, String type)
+Entity : +Animation animation(int start, int end, float duration)
+Entity : +void update(float delta)
+Entity : +void createCollision(World world)
+Entity : +TextureRegion getFrame(float delta)
+Entity : +State getState()
+Entity : +abstract void takeDamage(float damage)
+Entity : +abstract void attack()
+Entity : +float getHealth()
+
+
+Enemy : Rectangle collison
+Enemy : Texture text
+Enemy : -Animation<TextureRegion> runAnimationTexture
+Enemy : +Enemy(float posX, float posY, float health, TextureAtlas texture, String locTexture)
+Enemy : +void update(float delta, float playerPosX, float playerPosY)
+Enemy : +void move(float posX, float posY)
+Enemy : +void takeDamage(float damage)
+Enemy : +void Attack()
+Enemy : +boolean isAlive()
+Enemy : +Rectangle getCollison()
+
+Player : +Gun weapon
+Player : +Player(float posX, float posY, float health, TextureAtlas texture, String locTexture)
+Player : +void update(float delta)
+Player : +Gun getWeapon()
+Player : +void takeDamage(float damage)
+Player : +void attack()
+
+
+@enduml
