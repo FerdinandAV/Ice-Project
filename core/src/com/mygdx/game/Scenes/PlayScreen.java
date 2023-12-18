@@ -71,7 +71,6 @@ public class PlayScreen implements Screen {
         player = new Player(1000, 1000, 100, playerAtlas, "Knight_Animation");
 
         player.createCollision(world);
-
     }
 
     /**
@@ -84,11 +83,9 @@ public class PlayScreen implements Screen {
             game.endGame();
         }
 
-
         world.step(1 / 60f, 6, 2);
 
         player.update(dt);
-
 
         if (enemies.size() < 80) {
             enemies.add(new Enemy(MathUtils.random(100, 2000), MathUtils.random(100, 2000), 20, playerAtlas, "Knight_Animation"));
@@ -126,11 +123,8 @@ public class PlayScreen implements Screen {
             }
         }
 
-
         gameCamera.update(player.body.getPosition().x, player.body.getPosition().y);
         renderer.setView(gameCamera.camera);
-
-
     }
 
     @Override

@@ -71,5 +71,4 @@ public class Gun extends Weapon {
             return true;
         }
     }
-
 }

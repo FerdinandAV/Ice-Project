@@ -72,7 +72,7 @@ public class MainMenuScreen extends ScreenAdapter {
             }
         });
         Gdx.input.setInputProcessor(stage);
-        ds.playAudio("Theme");
+        ds.playAudio("Menu");
     }
 
     private TextButton addButton(String name) {

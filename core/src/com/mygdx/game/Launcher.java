@@ -28,7 +28,7 @@ public class Launcher extends Game {
         audio = new Audio();
 
         setScreen(new MainMenuScreen(assets.getAssetManager(), this));
-        tileset = assets.getAssetManager().get(Assets.TILESET_01);
+
     }
 
     public void startGame() {
@@ -47,7 +47,6 @@ public class Launcher extends Game {
         switch (choice) {
             case "Menu":
                 audio.MenuSound();
-                audio.StopSound();
                 break;
             case "Theme":
                 audio.ThemeSound();

@@ -15,7 +15,7 @@ public class Assets {
 
     public void loadAll(){
         assetManager.load(TILESET_01);
-        assetManager.load(SKIN) ;
+        assetManager.load(SKIN);
     }
 
     public AssetManager getAssetManager() {
